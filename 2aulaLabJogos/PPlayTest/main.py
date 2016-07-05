@@ -37,8 +37,8 @@ def MapaParaTela(xm, ym, janelaPosX, janelaPox):
 
 
 # criar sprite
-ufo = Sprite("heli.png", 3)
-ufo.set_total_duration(250)
+ufo = Sprite("heli.png",3)
+ufo.set_total_duration(300)
 
 # mover o sprite para a posição (ufoPosX,ufoPosY)
 # ufo.move_x(ufoPosX)

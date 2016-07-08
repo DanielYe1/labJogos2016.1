@@ -7,11 +7,10 @@ from math import *
 
 janela = Window(250,250)
 
-moeda = Sprite("sarcofago_teste_f10.png",10)
-moeda.set_total_duration(500)
+moeda = Sprite("sarcofago.png",144)
+moeda.set_total_duration(1000)
 
 while True:
-    janela.set_background_color((255,255,255))
     moeda.draw()
     moeda.update()
     janela.update()

@@ -315,6 +315,11 @@ while True:
     if fim:
         janela.set_background_color((0, 0, 0))
         janela.draw_text("A EQUIPE ROCKET TE PEGOU!", 5, 5, 40, (255, 255, 255), "Calibri", True)
+        janela.draw_text("ELES ROUBARAM TODAS SUAS", 5, 40, 30, (255, 255, 255), "Calibri", True)
+        janela.draw_text("POKEBOLAS! :/", 5, 60, 30, (255, 255, 255), "Calibri", True)
+        janela.draw_text("PRESSIONE ENTER PARA VOLTAR!", 5, 100, 30, (255, 255, 255), "Calibri", True)
+        janela.draw_text("A AJUDAR OS POKEMONS!", 5, 120, 30, (255, 255, 255), "Calibri", True)
+        score=0
         if teclado.key_pressed("ENTER"):
             fim = False
 

@@ -145,12 +145,14 @@ background, xFundo, yFundo = createBackGround("Background_01jungle.jpg")
 
 pokemonsNaHora = []
 
+pokemonRate = 300
 # Game Loop
 while True:
     xFundo, yFundo = updateBackgroundPosition(background, xFundo, yFundo)
     drawBackground(background, xFundo, yFundo)
     if janela.total_time % 300 == 0 or len(pokemonsNaHora) == 0:
         pokemonsNaHora.append(escolherPoke(pokes))
+        pokemonRate-=1
     for x in set(pokemonsNaHora):
         x.cordX, x.cordY = updateBackgroundPosition(x.sprite, x.cordX, x.cordY)
         if x.cordX < 50:

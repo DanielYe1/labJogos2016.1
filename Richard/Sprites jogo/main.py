@@ -25,10 +25,16 @@ class richard:
         self.posX = posX
         self.posY = posY
         self.speedY = speedY
-        spritePulando.set_total_duration(1250)
-        spriteAbaixando.set_total_duration(1250)
-        spriteCorrendo.set_total_duration(1250)
-        spriteAtual.set_total_duration(1250)
+        spriteCorrendo.set_total_duration(550)
+        spriteCorrendo = spriteCorrendo.set_sequence(0, 4)
+        spritePulando.set_total_duration(0)
+        spritePulando = spritePulando.set_sequence(4, 5)
+        spriteAbaixando.set_total_duration(0)
+        spriteAbaixando = spriteAbaixando.set_sequence(5, 6)
+        if spriteAtual == spriteCorrendo:
+            spriteAtual.set_total_duration(550)
+        else:
+            spriteAtual.set_total_duration(0)
 
 
 # Gravidade
@@ -46,13 +52,8 @@ def updateHeroPosition(hero, dt):
     return hero.posX, hero.posY
 
 
-richard = richard(
-    Sprite("D:/Daniel/PycharmProjects/test/labJogos/Richard/Sprites jogo/sprites/Ar/arraia_fps21.png", 21),
-    Sprite(
-        "D:/Daniel/PycharmProjects/test/labJogos/Richard/Sprites jogo/sprites/Ar/baiacu_fps33.png",
-        33), Sprite("D:/Daniel/PycharmProjects/test/labJogos/Richard/Sprites jogo/sprites/Ar/lanturne_fps16.png", 16),
-    Sprite("D:/Daniel/PycharmProjects/test/labJogos/Richard/Sprites jogo/sprites/Ar/arraia_fps21.png", 21),
-    300, 350, -500)
+richard = richard(Sprite("richard.png", 6), Sprite("richard.png", 6), Sprite("richard.png", 6),
+                  Sprite("richard.png", 6), 300, 350, -500)
 
 
 # Classe pokemon
@@ -90,9 +91,6 @@ def criarPokemons():
         True)
     lanturn = pokemon(
         Sprite("D:/Daniel/PycharmProjects/test/labJogos/Richard/Sprites jogo/sprites/Ar/lanturne_fps16.png", 16), True)
-    pidgey = pokemon(
-        Sprite("D:/Daniel/PycharmProjects/test/labJogos/Richard/Sprites jogo/sprites/Ar/pigey_fps18.png", 18),
-        True)
     carvana = pokemon(
         Sprite("D:/Daniel/PycharmProjects/test/labJogos/Richard/Sprites jogo/sprites/Ar/piranha_fps19.png", 19), True)
     pori2 = pokemon(
@@ -148,7 +146,7 @@ def criarPokemons():
     wailmer = pokemon(
         Sprite("D:/Daniel/PycharmProjects/test/labJogos/Richard/Sprites jogo/sprites/Terra/wailmer_fps21.png", 21),
         False)
-    pokes = [sarcofago, mantine, qwilfish, beedrill, kyogre, lanturn, pidgey, carvana, pori2, sharpedo, wailord, woobat,
+    pokes = [sarcofago, mantine, qwilfish, beedrill, kyogre, lanturn, carvana, pori2, sharpedo, wailord, woobat,
              yanma, zoobat, bloqueador, gamba, golem, hipo, lesma, muk, quilava, raticate, torterra, vic, wailmer]
     return pokes
 
@@ -207,7 +205,7 @@ def desenharPokes(pokemonsNaHora, count):
             pokemonsNaHora.remove(x)
         desenharSprite(x.sprite, x.cordX, x.cordY)
         # treta, pode dar ruim
-        if Collision.collided(x.sprite, richard.spriteAtual):
+        if Collision.perfect_collision(x.sprite, richard.spriteAtual):
             x.cordX = xJanela
             if x.voador:
                 x.cordY = yJanela * 0.55
@@ -254,5 +252,5 @@ while True:
     janela.draw_text(str(3 - count), xJanela - 30, yJanela - 40, 40, (255, 235, 143), "Helvetica", True)
 
     if count >= 3:
-        janela.set_background_color((0,0,0))
+        janela.set_background_color((0, 0, 0))
     janela.update()

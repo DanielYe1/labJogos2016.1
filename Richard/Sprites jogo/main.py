@@ -52,8 +52,8 @@ def updateHeroPosition(hero, dt):
     return hero.posX, hero.posY
 
 
-richard = richard(Sprite("richard.png", 6), Sprite("richard.png", 6), Sprite("richard.png", 6),
-                  Sprite("richard.png", 6), 300, 350, -500)
+richard = richard(Sprite("richard60.png", 6), Sprite("richard60.png", 6), Sprite("richard60.png", 6),
+                  Sprite("richard60.png", 6), 300, 350, -500)
 
 
 # Classe pokemon

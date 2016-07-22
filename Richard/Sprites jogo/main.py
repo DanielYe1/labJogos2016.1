@@ -81,70 +81,70 @@ def escolherPoke(vetor):
 def criarPokemons():
     pokes = []
     mantine = pokemon(
-        Sprite("D:/Daniel/PycharmProjects/test/labJogos/Richard/Sprites jogo/sprites/Ar/arraia_fps21.png", 21), True)
+        Sprite("./sprites/Ar/arraia_fps21.png", 21), True)
     qwilfish = pokemon(
-        Sprite("D:/Daniel/PycharmProjects/test/labJogos/Richard/Sprites jogo/sprites/Ar/baiacu_fps33.png", 33), True)
+        Sprite("./sprites/Ar/baiacu_fps33.png", 33), True)
     beedrill = pokemon(
-        Sprite("D:/Daniel/PycharmProjects/test/labJogos/Richard/Sprites jogo/sprites/Ar/beedrill_fps20.png", 20), True)
+        Sprite("./sprites/Ar/beedrill_fps20.png", 20), True)
     kyogre = pokemon(
-        Sprite("D:/Daniel/PycharmProjects/test/labJogos/Richard/Sprites jogo/sprites/Ar/kyogre_fps24.png", 24),
+        Sprite("./sprites/Ar/kyogre_fps24.png", 24),
         True)
     lanturn = pokemon(
-        Sprite("D:/Daniel/PycharmProjects/test/labJogos/Richard/Sprites jogo/sprites/Ar/lanturne_fps16.png", 16), True)
+        Sprite("./sprites/Ar/lanturne_fps16.png", 16), True)
     carvana = pokemon(
-        Sprite("D:/Daniel/PycharmProjects/test/labJogos/Richard/Sprites jogo/sprites/Ar/piranha_fps19.png", 19), True)
+        Sprite("./sprites/Ar/piranha_fps19.png", 19), True)
     pori2 = pokemon(
-        Sprite("D:/Daniel/PycharmProjects/test/labJogos/Richard/Sprites jogo/sprites/Ar/pori2_fps12.png", 12),
+        Sprite("./sprites/Ar/pori2_fps12.png", 12),
         True)
     sharpedo = pokemon(
-        Sprite("D:/Daniel/PycharmProjects/test/labJogos/Richard/Sprites jogo/sprites/Ar/shapedo_fps19.png", 19), True)
+        Sprite("./sprites/Ar/shapedo_fps19.png", 19), True)
     wailord = pokemon(
-        Sprite("D:/Daniel/PycharmProjects/test/labJogos/Richard/Sprites jogo/sprites/Ar/wailord_fps28.png", 28), True)
+        Sprite("./sprites/Ar/wailord_fps28.png", 28), True)
     woobat = pokemon(
-        Sprite("D:/Daniel/PycharmProjects/test/labJogos/Richard/Sprites jogo/sprites/Ar/woobat_fps16.png", 16),
+        Sprite("./sprites/Ar/woobat_fps16.png", 16),
         True)
     yanma = pokemon(
-        Sprite("D:/Daniel/PycharmProjects/test/labJogos/Richard/Sprites jogo/sprites/Ar/yama_fps21.png", 21),
+        Sprite("./sprites/Ar/yama_fps21.png", 21),
         True)
     zoobat = pokemon(
-        Sprite("D:/Daniel/PycharmProjects/test/labJogos/Richard/Sprites jogo/sprites/Ar/zoobat_fps20.png", 20),
+        Sprite("./sprites/Ar/zoobat_fps20.png", 20),
         True)
     # fim
 
     # terrestres
     bloqueador = pokemon(
-        Sprite("D:/Daniel/PycharmProjects/test/labJogos/Richard/Sprites jogo/sprites/Terra/bloqueador_fps17.png", 17),
+        Sprite("./sprites/Terra/bloqueador_fps17.png", 17),
         False)
     gamba = pokemon(
-        Sprite("D:/Daniel/PycharmProjects/test/labJogos/Richard/Sprites jogo/sprites/Terra/gamba_fps16.png", 16), False)
+        Sprite("./sprites/Terra/gamba_fps16.png", 16), False)
     golem = pokemon(
-        Sprite("D:/Daniel/PycharmProjects/test/labJogos/Richard/Sprites jogo/sprites/Terra/golem_fps16.png", 16), False)
+        Sprite("./sprites/Terra/golem_fps16.png", 16), False)
     hipo = pokemon(
-        Sprite("D:/Daniel/PycharmProjects/test/labJogos/Richard/Sprites jogo/sprites/Terra/hipopotamo_fps16.png", 16),
+        Sprite("./sprites/Terra/hipopotamo_fps16.png", 16),
         False)
     lesma = pokemon(
-        Sprite("D:/Daniel/PycharmProjects/test/labJogos/Richard/Sprites jogo/sprites/Terra/lesma_fps9.png", 9),
+        Sprite("./sprites/Terra/lesma_fps9.png", 9),
         False)
     muk = pokemon(
-        Sprite("D:/Daniel/PycharmProjects/test/labJogos/Richard/Sprites jogo/sprites/Terra/muk_fps17.png", 17),
+        Sprite("./sprites/Terra/muk_fps17.png", 17),
         False)
     quilava = pokemon(
-        Sprite("D:/Daniel/PycharmProjects/test/labJogos/Richard/Sprites jogo/sprites/Terra/quilava_fps18.png", 18),
+        Sprite("./sprites/Terra/quilava_fps18.png", 18),
         False)
     raticate = pokemon(
-        Sprite("D:/Daniel/PycharmProjects/test/labJogos/Richard/Sprites jogo/sprites/Terra/raticate_fps11.png", 11),
+        Sprite("./sprites/Terra/raticate_fps11.png", 11),
         False)
     sarcofago = pokemon(
-        Sprite("D:/Daniel/PycharmProjects/test/labJogos/Richard/Sprites jogo/sprites/Terra/sacofago_fps17.png", 17),
+        Sprite("./sprites/Terra/sacofago_fps17.png", 17),
         False)
     torterra = pokemon(
-        Sprite("D:/Daniel/PycharmProjects/test/labJogos/Richard/Sprites jogo/sprites/Terra/torterra_fps11.png", 11),
+        Sprite("./sprites/Terra/torterra_fps11.png", 11),
         False)
     vic = pokemon(
-        Sprite("D:/Daniel/PycharmProjects/test/labJogos/Richard/Sprites jogo/sprites/Terra/vic_fps19.png", 19),
+        Sprite("./sprites/Terra/vic_fps19.png", 19),
         False)
     wailmer = pokemon(
-        Sprite("D:/Daniel/PycharmProjects/test/labJogos/Richard/Sprites jogo/sprites/Terra/wailmer_fps21.png", 21),
+        Sprite("./sprites/Terra/wailmer_fps21.png", 21),
         False)
     pokes = [sarcofago, mantine, qwilfish, beedrill, kyogre, lanturn, carvana, pori2, sharpedo, wailord, woobat,
              yanma, zoobat, bloqueador, gamba, golem, hipo, lesma, muk, quilava, raticate, torterra, vic, wailmer]

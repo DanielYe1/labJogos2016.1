@@ -25,14 +25,14 @@ class richard:
         self.posX = posX
         self.posY = posY
         self.speedY = speedY
-        spriteCorrendo.set_total_duration(550)
+        spriteCorrendo.set_total_duration(450)
         spriteCorrendo = spriteCorrendo.set_sequence(0, 4)
         spritePulando.set_total_duration(0)
         spritePulando = spritePulando.set_sequence(4, 5)
         spriteAbaixando.set_total_duration(0)
         spriteAbaixando = spriteAbaixando.set_sequence(5, 6)
         if spriteAtual == spriteCorrendo:
-            spriteAtual.set_total_duration(550)
+            spriteAtual.set_total_duration(450)
         else:
             spriteAtual.set_total_duration(0)
 
@@ -52,8 +52,9 @@ def updateHeroPosition(hero, dt):
     return hero.posX, hero.posY
 
 
-richard = richard(Sprite("richard60.png", 6), Sprite("richard60.png", 6), Sprite("richard60.png", 6),
-                  Sprite("richard60.png", 6), 300, 350, -500)
+richard = richard(Sprite("./sprites/richard60.png", 6), Sprite("./sprites/richard60.png", 6),
+                  Sprite("./sprites/richard60.png", 6),
+                  Sprite("./sprites/richard60.png", 6), 300, 350, -500)
 
 
 # Classe pokemon
@@ -154,7 +155,7 @@ def criarPokemons():
 pokes = criarPokemons()
 
 # Cria Pororoca
-pororoca = Sprite("pororoca.png", 10)
+pororoca = Sprite("./sprites/pororoca.png", 10)
 pororoca.set_total_duration(1250)
 
 
@@ -217,40 +218,99 @@ def desenharPokes(pokemonsNaHora, count):
 
 
 # Criar Background
-background, xFundo, yFundo = createBackGround("Background_01jungle.jpg")
+background, xFundo, yFundo = createBackGround("./images/Background_01jungle.jpg")
 
 pokemonsNaHora = []
 
 pokemonRate = 300
 count = 0
+telaAtual = 'menu'
+
+
+def textosImg(imagem, posx=0, posy=0):
+    imagem.set_position(posx, posy)
+    imagem.draw()
+    return 0
+
+
+def menu(xJanela, yJanela):
+    global telaAtual
+    # Criar Background
+    drawBackground(background, xFundo, yFundo)
+    textos = dict(
+        logo=GameImage('./images/logoRunRunRichard.png'),
+        enter=GameImage('./images/aperteEnter.png'),
+        scrore=GameImage('./images/score.png'),
+    )
+    textosImg(textos['logo'], xJanela / 2 - textos['logo'].width / 2, 20)
+    textosImg(textos['enter'], xJanela / 2 - textos['enter'].width / 2, yJanela / 2 + 80)
+    if teclado.key_pressed("ENTER"):
+        telaAtual = 'start'
+
+
+# ranking
+def gravaRanking(distPercorrida, nomeArq):
+    from datetime import datetime
+    bd = open(nomeArq, 'r')
+    bc = open('copia.txt', 'w')
+    for linha in bd:
+        dado = linha.strip().split()
+        if distPercorrida > int(dado[0]):
+            bc.write(str(distPercorrida) + " " + str(datetime.now()) + "\n")
+            distPercorrida = 0
+        bc.write(linha)
+    bd.close()
+    bc.close()
+    bd = open(nomeArq, "w")
+    bc = open("copia.txt", "r")
+    count = 0
+    for linha in bc:
+        count += 1
+        if count <= 3:
+            bd.write(linha)
+    bd.close()
+    bc.close()
+
+
+nomeArq = "ranking.txt"
+
+tempoInutil = 0
 # Game Loop
 while True:
-    dt = janela.delta_time()
-    xFundo, yFundo = updateBackgroundPosition(background, xFundo, yFundo)
-    drawBackground(background, xFundo, yFundo)
-    if janela.total_time % 300 == 0:
-        pokemonsNaHora.append(escolherPoke(pokes))
-        pokemonRate -= 1
+    if telaAtual == 'menu':
+        menu(xJanela, yJanela)
+        tempoInutil = janela.total_time
+    elif telaAtual == 'start':
+        dt = janela.delta_time()
+        xFundo, yFundo = updateBackgroundPosition(background, xFundo, yFundo)
+        drawBackground(background, xFundo, yFundo)
+        if janela.total_time % 300 == 0:
+            pokemonsNaHora.append(escolherPoke(pokes))
+            pokemonRate -= 1
 
-    # gravidade e mudança de sprites
-    if teclado.key_pressed("UP") and richard.posY == 350:
-        richard.speedY = -500
-    elif teclado.key_pressed("DOWN") and richard.posY == 350:
-        richard.spriteAtual = richard.spriteAbaixando
-    elif richard.posY < 350:
-        richard.spriteAtual = richard.spritePulando
-    elif richard.posY == 350:
-        richard.spriteAtual = richard.spriteCorrendo
-    desenharSprite(richard.spriteAtual, richard.posX, richard.posY)
+        # gravidade e mudança de sprites
+        if teclado.key_pressed("UP") and richard.posY == 350:
+            richard.speedY = -500
+        elif teclado.key_pressed("DOWN") and richard.posY == 350:
+            richard.spriteAtual = richard.spriteAbaixando
+        elif richard.posY < 350:
+            richard.spriteAtual = richard.spritePulando
+        elif richard.posY == 350:
+            richard.spriteAtual = richard.spriteCorrendo
+        desenharSprite(richard.spriteAtual, richard.posX, richard.posY)
 
-    count = desenharPokes(pokemonsNaHora, count)
+        count = desenharPokes(pokemonsNaHora, count)
 
-    desenharSprite(pororoca, -120, 170)
-    richard.posX, richard.posY = updateHeroPosition(richard, dt)
+        desenharSprite(pororoca, -120, 170)
+        richard.posX, richard.posY = updateHeroPosition(richard, dt)
+        distancia = int(((janela.total_time - tempoInutil) / 300))
+        janela.draw_text(str(distancia), 5, 5, 40, (255, 235, 143), "Helvetica", True)
+        janela.draw_text(str(3 - count), xJanela - 30, yJanela - 40, 40, (255, 235, 143), "Helvetica", True)
 
-    janela.draw_text(str(int((janela.total_time / 300))), 5, 5, 40, (255, 235, 143), "Helvetica", True)
-    janela.draw_text(str(3 - count), xJanela - 30, yJanela - 40, 40, (255, 235, 143), "Helvetica", True)
+        if count >= 3:
+            gravaRanking(distancia, nomeArq)
+            count = 0
+            distancia = 0
+            telaAtual = 'menu'
 
-    if count >= 3:
-        janela.set_background_color((0, 0, 0))
     janela.update()

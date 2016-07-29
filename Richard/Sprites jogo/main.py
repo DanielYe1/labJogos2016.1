@@ -5,6 +5,7 @@ from PPlay.sprite import *
 from PPlay.collision import *
 from random import *
 from math import *
+from datetime import datetime
 
 # Cria teclado
 teclado = Keyboard()
@@ -250,7 +251,6 @@ def menu(xJanela, yJanela):
 
 # ranking
 def gravaRanking(distPercorrida, nomeArq):
-    from datetime import datetime
     bd = open(nomeArq, 'r')
     bc = open('copia.txt', 'w')
     for linha in bd:
@@ -270,6 +270,29 @@ def gravaRanking(distPercorrida, nomeArq):
             bd.write(linha)
     bd.close()
     bc.close()
+
+
+def ranking(xJanela, yJanela):
+    bd = open('ranking.txt')
+    ranking = []
+    for linha in bd:
+        ranking.append(linha.strip().split())
+    global telaAtual
+    drawBackground(background, xFundo, yFundo)
+    score = GameImage('./images/score.png')
+    score.set_position(xJanela / 2 - score.width / 2, 20)
+    score.draw()
+    for i in range(0, len(ranking)):
+        janela.draw_text(str(i + 1) + 'º: ' + ranking[i][1] + ': ' + ranking[i][0], xJanela / 2 - score.width / 2.5,
+                         100 + (i * 40), 30, (255, 235, 143), "Helvetica", True)
+    enterEsc = GameImage('./images/enterEsc.png')
+    enterEsc.set_position(xJanela / 2 - enterEsc.width / 2, 260)
+    enterEsc.draw()
+    bd.close()
+    if teclado.key_pressed("ENTER"):
+        telaAtual = 'start'
+    elif teclado.key_pressed("ESCAPE"):
+        janela.close()
 
 
 nomeArq = "ranking.txt"
@@ -304,13 +327,16 @@ while True:
         desenharSprite(pororoca, -120, 170)
         richard.posX, richard.posY = updateHeroPosition(richard, dt)
         distancia = int(((janela.total_time - tempoInutil) / 300))
-        janela.draw_text(str(distancia), 5, 5, 40, (255, 235, 143), "Helvetica", True)
-        janela.draw_text(str(3 - count), xJanela - 30, yJanela - 40, 40, (255, 235, 143), "Helvetica", True)
+        janela.draw_text('Distância: ' + str(distancia), 5, 5, 40, (255, 235, 143), "Helvetica", True)
+        janela.draw_text('Vidas: ' + str(3 - count), xJanela - 150, 5, 40, (255, 235, 143), "Helvetica", True)
 
         if count >= 3:
             gravaRanking(distancia, nomeArq)
             count = 0
             distancia = 0
-            telaAtual = 'menu'
+            telaAtual = 'score'
+    elif telaAtual == 'score':
+        ranking(xJanela, yJanela)
+        tempoInutil = janela.total_time
 
     janela.update()

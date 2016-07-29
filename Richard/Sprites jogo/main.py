@@ -37,21 +37,18 @@ class richard:
         else:
             spriteAtual.set_total_duration(0)
 
+    def updateHeroPosition(self, dt):
+        self.posY += self.speedY * dt
+        if self.posY < 350:
+            self.speedY += gravidade * dt
+        else:
+            self.speedY = 0
+            self.posY = 350
+
 
 # Gravidade
 
 gravidade = 1000
-
-
-def updateHeroPosition(hero, dt):
-    hero.posY += hero.speedY * dt
-    if hero.posY < 350:
-        hero.speedY += gravidade * dt
-    else:
-        hero.speedY = 0
-        hero.posY = 350
-    return hero.posX, hero.posY
-
 
 richard = richard(Sprite("./sprites/richard60.png", 6), Sprite("./sprites/richard60.png", 6),
                   Sprite("./sprites/richard60.png", 6),
@@ -325,7 +322,7 @@ while True:
         count = desenharPokes(pokemonsNaHora, count)
 
         desenharSprite(pororoca, -120, 170)
-        richard.posX, richard.posY = updateHeroPosition(richard, dt)
+        richard.updateHeroPosition(dt)
         distancia = int(((janela.total_time - tempoInutil) / 300))
         janela.draw_text('Distância: ' + str(distancia), 5, 5, 40, (255, 235, 143), "Helvetica", True)
         janela.draw_text('Vidas: ' + str(3 - count), xJanela - 150, 5, 40, (255, 235, 143), "Helvetica", True)
